@@ -1,25 +1,73 @@
 import Router from 'ampersand-router';
 import React from 'react';
+import LocalLinks from 'local-links';
+import qs from 'qs';
 
 // Components
+import Layout from './layout';
+import NavHelper from './components/navHelper';
 import Login from './pages/login';
 import Repos from './pages/repos';
 
 export default Router.extend({
+
     routes: {
         '': 'login',
-        'repos': 'repos'
+        'repos': 'repos',
+        'user': 'user',
+        'auth/callback?:query': 'authCallback'
+    },
+
+
+    renderPage(page, opts = {layout: true}) {
+
+        if(opts.layout) {
+            page = (
+                <Layout>
+                    {page}
+                </Layout>
+            )
+        }
+
+        let navHelper = (
+            <NavHelper>
+                {page}
+            </NavHelper>
+        )
+
+        React.render(navHelper, document.body);
     },
 
     login() {
 
-        React.render(<Login name='ROSCOVAN IS THE BEST'/>, document.body);
+        this.renderPage(<Login name='ROSCOVAN IS THE BEST'/>, {layout: false});
 
     },
 
     repos() {
 
-        React.render(<Repos/>, document.body);
+        this.renderPage(<Repos/>);
 
+    },
+
+    user() {
+
+        window.location = 'https://github.com/login/oauth/authorize?' + qs.stringify({
+            client_id: '6147d0e9f59196aed457',
+            redirect_uri: window.location.origin + '/auth/callback',
+            scope: 'user, repo'
+        })
+
+    },
+
+    authCallback(query) {
+        query = qs.parse(query);
+        console.log( query );
+        xhr({
+            url: 'url',
+            json: true
+        }, (err, req, body) {
+            console.log( body );
+        })
     }
 })
