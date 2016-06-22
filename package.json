@@ -7,6 +7,7 @@
   },
   "devDependencies": {
     "ampersand-app": "^2.0.0",
+    "ampersand-model": "^8.0.0",
     "ampersand-router": "^4.0.0",
     "autoprefixer": "^6.0.2",
     "babel": "^5.8.23",
@@ -26,6 +27,7 @@
     "url-loader": "^0.5.6",
     "webpack": "^1.12.1",
     "webpack-dev-server": "^1.10.1",
+    "xhr": "^2.2.0",
     "yeticss": "^7.0.5"
   },
   "license": "MIT",

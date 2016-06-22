@@ -1,8 +1,9 @@
+import app from 'ampersand-app';
 import Router from 'ampersand-router';
 import React from 'react';
 import LocalLinks from 'local-links';
 import qs from 'qs';
-
+import xhr from 'xhr';
 // Components
 import Layout from './layout';
 import NavHelper from './components/navHelper';
@@ -63,11 +64,13 @@ export default Router.extend({
     authCallback(query) {
         query = qs.parse(query);
         console.log( query );
+
         xhr({
-            url: 'url',
+            url: 'https://wladhubtags.herokuapp.com/authenticate/' + query.code,
             json: true
-        }, (err, req, body) {
-            console.log( body );
-        })
+        }, (err, req, body) => {
+
+            app.me.token = body.token;
+        });
     }
 })
