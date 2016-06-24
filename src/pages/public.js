@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default React.createClass({
-    displayName: 'LoginPage',
+    displayName: 'PublicPage',
     edit() {
         alert('Im using fucking react man!');
     },
@@ -13,7 +13,7 @@ export default React.createClass({
                 </header>
                 <div>
                     <p>We label stuff for your, because, we can&trade;</p>
-                    <a href="/user" className="button button-large">
+                    <a href="/login" className="button button-large">
                         <span className='mega-octicon octicon-mark-github'></span>
                         Login with Github
                     </a>

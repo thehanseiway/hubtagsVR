@@ -7,15 +7,16 @@ import xhr from 'xhr';
 // Components
 import Layout from './layout';
 import NavHelper from './components/navHelper';
-import Login from './pages/login';
+import Public from './pages/public';
 import Repos from './pages/repos';
 
 export default Router.extend({
 
     routes: {
-        '': 'login',
+        '': 'public',
         'repos': 'repos',
-        'user': 'user',
+        'login': 'login',
+        'logout': 'logout',
         'auth/callback?:query': 'authCallback'
     },
 
@@ -24,7 +25,7 @@ export default Router.extend({
 
         if(opts.layout) {
             page = (
-                <Layout>
+                <Layout me={app.me}>
                     {page}
                 </Layout>
             )
@@ -39,9 +40,9 @@ export default Router.extend({
         React.render(navHelper, document.body);
     },
 
-    login() {
+    public() {
 
-        this.renderPage(<Login name='ROSCOVAN IS THE BEST'/>, {layout: false});
+        this.renderPage(<Public name='ROSCOVAN IS THE BEST'/>, {layout: false});
 
     },
 
@@ -51,7 +52,7 @@ export default Router.extend({
 
     },
 
-    user() {
+    login() {
 
         window.location = 'https://github.com/login/oauth/authorize?' + qs.stringify({
             client_id: '6147d0e9f59196aed457',
@@ -61,9 +62,13 @@ export default Router.extend({
 
     },
 
+    logout() {
+        window.localStorage.clear();
+        window.location = '/';
+    },
+
     authCallback(query) {
         query = qs.parse(query);
-        console.log( query );
 
         xhr({
             url: 'https://wladhubtags.herokuapp.com/authenticate/' + query.code,
@@ -71,6 +76,7 @@ export default Router.extend({
         }, (err, req, body) => {
 
             app.me.token = body.token;
+            this.redirectTo('/repos');
         });
     }
 })
