@@ -9,6 +9,7 @@ import Layout from './layout';
 import NavHelper from './components/navHelper';
 import Public from './pages/public';
 import Repos from './pages/repos';
+import RepoDetails from './pages/repoDetails';
 
 export default Router.extend({
 
@@ -17,9 +18,9 @@ export default Router.extend({
         'repos': 'repos',
         'login': 'login',
         'logout': 'logout',
+        'repo/:owner/:name': 'repoDetails',
         'auth/callback?:query': 'authCallback'
     },
-
 
     renderPage(page, opts = {layout: true}) {
 
@@ -40,6 +41,13 @@ export default Router.extend({
         React.render(navHelper, document.body);
     },
 
+    repoDetails(owner, name) {
+
+        const model = app.me.repos.getByFullName(owner + '/' + name);
+        this.renderPage(<RepoDetails repo={model} />);
+
+    },
+
     public() {
 
         this.renderPage(<Public name='ROSCOVAN IS THE BEST'/>, {layout: false});
@@ -48,7 +56,7 @@ export default Router.extend({
 
     repos() {
 
-        this.renderPage(<Repos/>);
+        this.renderPage(<Repos repos={app.me.repos}/>);
 
     },
 

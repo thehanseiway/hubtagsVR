@@ -1,4 +1,4 @@
-import app from 'amperssand-app'
+import app from 'ampersand-app'
 
 export default {
     ajaxConfig() {
