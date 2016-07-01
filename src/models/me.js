@@ -1,5 +1,6 @@
 import Model from 'ampersand-model';
 import RepoCollection from './repoCollection';
+import LabelCollection from './labelCollection';
 import githubMixin from '../helpers/githubMixin';
 
 export default Model.extend(githubMixin, {
@@ -21,7 +22,8 @@ export default Model.extend(githubMixin, {
     },
 
     collections: {
-        repos: RepoCollection
+        repos: RepoCollection,
+        labels: LabelCollection,
     },
 
     onTokenChange() {
@@ -33,6 +35,7 @@ export default Model.extend(githubMixin, {
         if (this.token) {
             this.fetch();
             this.repos.fetch();
+            this.labels.fetch();
         }
     }
 })
