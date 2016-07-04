@@ -17,7 +17,7 @@ import MessagePage from './pages/messagePage';
 function requiresAuth(func) {
     return function () {
         if (app.me.token) {
-            return this[func].apply(this, []);
+            return this[func].apply(this, arguments);
         } else {
             return this.redirectTo('/');
         }
