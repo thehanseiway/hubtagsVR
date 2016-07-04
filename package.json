@@ -38,6 +38,8 @@
   "main": "app.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack"
+    "build": "webpack",
+    "deploy": "surge -p public -d hubtagsvr.surge.sh",
+    "yolo": "npm run build && npm run deploy"
   }
 }

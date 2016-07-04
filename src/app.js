@@ -1,8 +1,8 @@
-import app from 'ampersand-app';
 import Router from './router';
+import app from 'ampersand-app';
+import Me from './models/me';
 import stylus from './stylus/main.styl';
 import octicons from 'octicons/build/font/octicons.min.css';
-import Me from './models/me';
 
 window.app = app;
 

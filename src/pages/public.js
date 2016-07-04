@@ -11,8 +11,7 @@ export default React.createClass({
                 <div>
                     <p>We label stuff for your, because, we can&trade;</p>
                     <a href="/login" className="button button-large">
-                        <span className='mega-octicon octicon-mark-github'></span> 
-                        <span>Login with Github</span>
+                        <span className='mega-octicon octicon-mark-github'></span> <span>Login with Github</span>
                     </a>
                 </div>
             </div>
